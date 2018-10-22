@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <title>Khwarizmi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<h1 style="background-color:SlateBlue; color:Black; text-align:center;">Khwarizmi</h1>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+        </div>
+          <div class="content-section">
+            <h3">Khwarizmi</h3>
+              <p class='text-muted'>Because algebra is pretty.</p>
+              <a href ="https://github.com/lpereyrasantiago/khwarizmi">See GitHub repository</a>
+          </div>
+      </div>
+        <div class="content-section">
+        <form method="POST" action="">
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Submit your equation</legend>
+                <div class="form-group">
+                    {{ form.equation.label(class="form-control-label") }}
+                    {{ form.equation(class="form-control form-control-lg") }}
+                    {{ form.operation.label(class="form-control-label") }}
+                    {{ form.operation(class="form-control form-control-lg") }}
+                </div>
+                <p>Solution: {{ solution }}</p>
+                <div class="form-group">
+                    {{ form.send(class="btn btn-outline-info") }}
+                </div>
+                    <p style="font-size:125%;">Operations</p>
+                        <ul style="font-size:100%;">
+                            <li>sort() - Returns the equation sorted and simplified</li>
+                            <li>solve() - Returns equation solution (only for non-linear equations)</li>
+                            <li>solve_for(variable, value) - Returns equation solution when variable equals value (only for linear equations)</li>
+                            <li>get_point(x_value) - Returns the point formed by a linear equation when x equals x_value.</li>
+                            <li>express_as(form) - Returns an equivalent linear equation expressed on the form passed as an argument.</li>
+                            <li>slope - Returns the slope of a linear equation</li>
+                            <li>y_intercept - Returns y intercept of a linear equation</li>
+                            <li>form - Returns the form of a linear equation</li>
+                        </ul>
+            </fieldset>
+
+        </form>
+
+    </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
